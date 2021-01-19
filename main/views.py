@@ -17,5 +17,4 @@ def third(request):
 
 def book(request):
     book_list = Book.objects.all()
-    book_title = Book.title()
-    return render(request, "books.html", {"book_list": book_list}, {"title": book_title})
+    return render(request, "books.html")
