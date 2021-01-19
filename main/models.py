@@ -7,7 +7,7 @@ class ToDo(models.Model):
     is_closed = models.BooleanField(default=False)
     is_favorite = models.BooleanField(default=False)
 
-class BookShop(models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=50)
     subtitle = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
