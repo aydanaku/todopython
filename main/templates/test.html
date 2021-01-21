@@ -36,6 +36,8 @@
             <div class="todo_item
                 {% if todo.is_favorite %}
                     marked
+                {% else %}
+                    unmarked
                 {% endif %}
             ">
                 <div class="todo_item_header">
@@ -52,9 +54,9 @@
                         {% if todo.is_favorite %}
                             <a href="{% url 'mark-todo' todo.id %}"><img src="{% static './icons/yellow.png' %}" /></a>
                         {% else %}
-                            <a href="{% url 'mark-todo' todo.id %}"><img src="{% static './icons/star.png' %}" /></a>
+                            <a href="{% url 'unmark-todo' todo.id %}"><img src="{% static './icons/star.png' %}" /></a>
                         {% endif %}
-                        
+
                         <a href="{% url 'delete-todo' todo.id %}"><img src="{% static './icons/basket.png' %}" /></a>
                     </div>
                 </div>
