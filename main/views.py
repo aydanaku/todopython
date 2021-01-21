@@ -22,6 +22,11 @@ def add_todo(request):
     # return HttpResponse("Форма получена")
     return redirect(test)
 
+def delete_todo(request, id):
+    todo = ToDo.objects.get(id=id)
+    todo.delete()
+    return redirect(test)
+
 def third(request):
     return HttpResponse("This is page test3.")
 
