@@ -1,16 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Shop</title>
+    <link rel="stylesheet" href="{% static 'styles/index_book.css' %}" />
+    <!-- <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" /> -->
 </head>
 <body>
-    <h1>Книжный магазин</h1>
-    <h4>Homework 32</h4>
-    {% for book in book_list %}
-        <h4>{{ book.title }} - {{ book.author }}</h4>
-        <h5>{{ book.date }}</h5>
-    {% endfor %}
+    <section>
+        <div class="create_container">
+            <form action="{% url 'add-book' %}" method="POST">
+                {% csrf_token %}
+                <input
+                    class="create_title"
+                    type="text"
+                    placeholder="Введите заголовок книги"
+                    name="book_title"
+                />
+                <input
+                    class="create_subtitle"
+                    type="text"
+                    placeholder="Введите подзаголовок книги"
+                    name="book_subtitle"
+                />
+                <input
+                    class="create_description"
+                    type="text"
+                    placeholder="Введите описание книги"
+                    name="book_description"
+                />
+                <input
+                    class="create_price"
+                    type="text"
+                    placeholder="Введите цену книги"
+                    name="book_price"
+                />
+                <input
+                    class="create_genre"
+                    type="text"
+                    placeholder="Введите жанр книги"
+                    name="book_genre"
+                />
+                <input
+                    class="create_author"
+                    type="text"
+                    placeholder="Введите автора книги"
+                    name="book_author"
+                />
+                <input
+                    class="create_year"
+                    type="number"
+                    placeholder="Введите год выхода книги"
+                    name="book_year"
+                />
+                <div>
+                    <button class="create_button">Добавить книгу</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="book_container">
+            {% for book in book_list %}
+            <div class="book_item">
+                <div class="book_item_title">
+                    <!-- <label class="checkbox_container">
+                        <input type="checkbox" />
+                        <span class="checkmark"></span>
+                    </label> -->
+                    <h4>{{ book.title }}</h4>
+                </div>
+                <div>
+                    <h5>{{ book.author }}</h5>
+                </div>
+                <div class="book_item_footer">
+                    <p>{{ book.price }}</p>
+                    <div class="action_buttons">
+                        <img src="{% static './icons/star.png' %}" />
+                        <img src="{% static './icons/basket.png' %}" />
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 </body>
 </html>
