@@ -46,6 +46,23 @@ def book(request):
     book_list = Book.objects.all()
     return render(request, "books.html", {"book_list": book_list})
 
+def delete_book(request, id):
+    book_list = Book.objects.get(id=id)
+    book_list.delete()
+    return redirect(book)
+
+def mark_book(request, id):
+    book_list = Book.objects.get(id=id)
+    book_list.is_favorite = True
+    book_list.save()
+    return redirect(book)
+
+# def unmark_book(request, id):
+#     book_list = Book.objects.get(id=id)
+#     book_list.is_favorite = False
+#     book_list.save()
+#     return redirect(book)
+
 def add_book(request):
     form = request.POST
     title = form["book_title"]
@@ -55,7 +72,7 @@ def add_book(request):
     genre = form["book_genre"]
     author = form["book_author"]
     year = form["book_year"]
-    book = Book(title=title, subtitle=subtitle, description=description, price=price, genre=genre, author=author, year=year)
-    book.save()
+    book_list = Book(title=title, subtitle=subtitle, description=description, price=price, genre=genre, author=author, year=year)
+    book_list.save()
     # return HttpResponse("Форма получена")
     return redirect(book)

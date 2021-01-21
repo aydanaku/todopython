@@ -63,7 +63,11 @@
 
         <div class="book_container">
             {% for book in book_list %}
-            <div class="book_item">
+            <div class="book_item
+                {% if book.is_favorite %}
+                    marked
+                {% endif %}
+            ">
                 <div class="book_item_title">
                     <!-- <label class="checkbox_container">
                         <input type="checkbox" />
@@ -77,8 +81,13 @@
                 <div class="book_item_footer">
                     <p>{{ book.price }}</p>
                     <div class="action_buttons">
-                        <img src="{% static './icons/star.png' %}" />
-                        <img src="{% static './icons/basket.png' %}" />
+                        {% if book.is_favorite %}
+                            <a href="{% url 'mark-book' book.id %}"><img src="{% static './icons/yellow.png' %}" /></a>
+                        {% else %}
+                            <a href="{% url 'mark-book' book.id %}"><img src="{% static './icons/star.png' %}" /></a>
+                        {% endif %}
+
+                        <a href="{% url 'delete-book' book.id %}"><img src="{% static './icons/basket.png' %}" /></a>
                     </div>
                 </div>
             </div>
