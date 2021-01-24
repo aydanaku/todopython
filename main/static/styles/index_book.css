@@ -89,6 +89,10 @@ section{
     font-family: sans-serif;
 }
 
+.book_item_title h4 a{
+    text-decoration: none;
+}
+
 .book_item_footer{
     display: flex;
     justify-content: space-between;

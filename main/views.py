@@ -29,13 +29,13 @@ def delete_todo(request, id):
 
 def mark_todo(request, id):
     todo = ToDo.objects.get(id=id)
-    todo.is_favorite = True
+    todo.is_favorite = not todo.is_favorite
     todo.save()
     return redirect(test)
 
-def unmark_todo(request, id):
+def close_todo(request, id):
     todo = ToDo.objects.get(id=id)
-    todo.is_favorite = False
+    todo.is_closed = not todo.is_closed
     todo.save()
     return redirect(test)
 
@@ -53,15 +53,15 @@ def delete_book(request, id):
 
 def mark_book(request, id):
     book_list = Book.objects.get(id=id)
-    book_list.is_favorite = True
+    book_list.is_favorite = not book_list.is_favorite
     book_list.save()
     return redirect(book)
 
-# def unmark_book(request, id):
-#     book_list = Book.objects.get(id=id)
-#     book_list.is_favorite = False
-#     book_list.save()
-#     return redirect(book)
+def close_book(request, id):
+    book_list = Book.objects.get(id=id)
+    book_list.is_closed = not book_list.is_closed
+    book_list.save()
+    return redirect(book)
 
 def add_book(request):
     form = request.POST

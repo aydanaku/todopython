@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Shop</title>
     <link rel="stylesheet" href="{% static 'styles/index_book.css' %}" />
-    <!-- <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" />
 </head>
 <body>
     <section>
@@ -66,14 +66,20 @@
             <div class="book_item
                 {% if book.is_favorite %}
                     marked
+                {% elif book.is_closed %}
+                    done
                 {% endif %}
             ">
                 <div class="book_item_title">
-                    <!-- <label class="checkbox_container">
-                        <input type="checkbox" />
+                    <label class="checkbox_container">
+                        <input type="checkbox"
+                            {% if book.is_closed %}
+                                checked
+                            {% endif %}
+                        />
                         <span class="checkmark"></span>
-                    </label> -->
-                    <h4>{{ book.title }}</h4>
+                    </label>
+                    <h4><a href="{% url 'close-book' book.id %}">{{ book.title }}</a></h4>
                 </div>
                 <div>
                     <h5>{{ book.author }}</h5>
